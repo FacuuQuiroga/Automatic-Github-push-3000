@@ -3,24 +3,34 @@ TITLE Bienvenid@ %USERNAME% a Github automatic push
 MODE con:cols=80 lines=40
 color 0A
 
+if exist uwu goto inicio else goto crearcarpeta
+:crearcarpeta
+mkdir uwu
+cd uwu
+
 :inicio
 SET var=0
 cls
 echo ------------------------------------------------------------------------------
 echo  Github automatic push 3000 ^| Creado por facundoqc56@educastur.es
 echo ------------------------------------------------------------------------------
-echo  1    Hacer push  
-echo  2    Introducir repo git
-echo  3    Introducir direccion del proyecto 
+echo  1    Hacer PUSH  
+echo  2    Introducir repositorio GitHub
+echo  3    Introducir carpeta del proyecto 
 echo  4    Hacer push forzoso (-f)
 echo  5    Cosas secretas  
 echo  6    Salir
 echo ------------------------------------------------------------------------------
+echo Instrucciones: Primero introduce tu repositorio Github y la carpeta donde
+echo tengas el proyecto el cual vas a hacer el push.
+echo ------------------------------------------------------------------------------
 echo.
 echo.
-echo.
-echo NOTA: se va a crear 2 archivos .txt con la direccion del repositorio git y 
-echo otro con la carpeta en donde eclipse guarda tu proyecto, NO LOS BORRES!
+echo. 
+echo NOTA2: se va a crear una carpeta con la configuracion de tu repositorio github 
+echo y la carpeta en donde eclipse guarda tu proyecto, NO LOS BORRES!
+echo Luego podras hacer el push directamente sin tener que introducir nuevamente
+echo el directorio y repositorio
 echo.
 SET /p var= ^> Seleccione una opcion [1-6]:
 
@@ -46,6 +56,7 @@ goto:inicio
     <"directorio.txt" set/p "cdlinea="
     cd %cdlinea%
     echo Haciendo el push...
+	cls
     git push --repo=%gitlinea%
     pause
     goto:inicio
@@ -62,25 +73,26 @@ goto:inicio
 :op3
     cls
     echo.
-    echo copia el directorio donde esta el archivo .gitignore
     set/p carpeta= Cual es el directorio del proyecto?
     echo.
     pushd %carpeta%
     if exist .gitignore goto nicedir else goto baddir
 
     :baddir
-    echo carpeta incorrecta
+    echo Carpeta incorrecta
+	echo copia el directorio donde esta el archivo .gitignore
     pause
     goto:op3
 
     :nicedir
     popd
     echo %carpeta% > directorio.txt
-    echo directorio guardado!
+    echo Directorio guardado!
     pause
     goto:inicio
   
 :op4
+	cls
     echo.
     <"repogit.txt" set/p "gitlinea="
     <"directorio.txt" set/p "cdlinea="
@@ -140,7 +152,7 @@ goto:inicio
     echo                                 .yhso++:`                                      https://github.com/FacuuQuiroga
     echo.
     echo cierra el programa, jamas podras salir de aqui por cotilla MUAJAJAJAJ
-    pause
+	pause
     goto :op5
 
 :salir
