@@ -52,8 +52,8 @@ goto:inicio
 :op1
     cls
     echo.
-    <"repogit.txt" set/p "gitlinea="
-    <"directorio.txt" set/p "cdlinea="
+    <"uwu/repogit.txt" set/p "gitlinea="
+    <"uwu/directorio.txt" set/p "cdlinea="
     cd %cdlinea%
     echo Haciendo el push...
 	cls
@@ -94,9 +94,9 @@ goto:inicio
 :op4
 	cls
     echo.
-    <"repogit.txt" set/p "gitlinea="
-    <"directorio.txt" set/p "cdlinea="
-    echo %gitlinea%
+    <"uwu/repogit.txt" set/p "gitlinea="
+    <"uwu/directorio.txt" set/p "cdlinea="
+    echo %g1itlinea%
     echo %cdlinea%
     cd %cdlinea%
     git push --repo=%gitlinea% -f
