@@ -1,6 +1,6 @@
 @echo off
 TITLE Bienvenid@ %USERNAME% a Github automatic push
-MODE con:cols=80 lines=40
+MODE con:cols=113 lines=50
 color 0A
 
 if exist uwu goto inicio else goto crearcarpeta
@@ -11,35 +11,34 @@ cd uwu
 :inicio
 SET var=0
 cls
-echo ------------------------------------------------------------------------------
-echo  Github automatic push 3000 ^| Creado por facundoqc56@educastur.es
-echo ------------------------------------------------------------------------------
+echo -----------------------------------------------------------------------------------------------------------------
+echo  			    Github automatic push 3000 ^| Creado por facundoqc56@educastur.es
+echo -----------------------------------------------------------------------------------------------------------------
 echo  1    Hacer PUSH  
 echo  2    Introducir repositorio GitHub
 echo  3    Introducir carpeta del proyecto 
 echo  4    Hacer push forzoso (-f)
 echo  5    Cosas secretas  
 echo  6    Salir
-echo ------------------------------------------------------------------------------
-echo Instrucciones: Primero introduce tu repositorio Github y la carpeta donde
-echo tengas el proyecto el cual vas a hacer el push.
-echo ------------------------------------------------------------------------------
+echo ----------------------------------------------------------------------------------------------------------------
+echo Instrucciones:
+echo 1- Introduce tu repositorio Github
+echo 2- Introduce la carpeta donde tengas el proyecto.
+echo 3- Haz un PUSH!, si te da problemas puedes hacer un push forzoso de ultima opcion
+echo ----------------------------------------------------------------------------------------------------------------
+echo NOTA: se va a crear una carpeta (llamada "uwu") con la configuracion de tu repositorio github y la carpeta en donde eclipse 
+echo guarda tu proyecto, NO LOS BORRES!
+echo Luego podras hacer el push directamente sin tener que introducir nuevamente el directorio y repositorio.
 echo.
-echo.
-echo. 
-echo NOTA2: se va a crear una carpeta con la configuracion de tu repositorio github 
-echo y la carpeta en donde eclipse guarda tu proyecto, NO LOS BORRES!
-echo Luego podras hacer el push directamente sin tener que introducir nuevamente
-echo el directorio y repositorio
 echo.
 SET /p var= ^> Seleccione una opcion [1-6]:
 
 if "%var%"=="0" goto inicio
-if "%var%"=="1" goto op1
-if "%var%"=="2" goto op2
-if "%var%"=="3" goto op3
-if "%var%"=="4" goto op4
-if "%var%"=="5" goto op5
+if "%var%"=="1" goto push
+if "%var%"=="2" goto intgit
+if "%var%"=="3" goto intdir
+if "%var%"=="4" goto pushf
+if "%var%"=="5" goto chems
 if "%var%"=="6" goto salir
 
 ::Mensaje de error cuando se selecciona una opción fuera de rango
@@ -49,9 +48,15 @@ pause
 echo.
 goto:inicio
 
-:op1
+:push
     cls
     echo.
+    echo La direccion Git es 
+    echo %gitlinea%
+    echo y la carpeta del proyeto es 
+    echo %cdlinea%
+    echo.
+    
     <"uwu/repogit.txt" set/p "gitlinea="
     <"uwu/directorio.txt" set/p "cdlinea="
     cd %cdlinea%
@@ -61,7 +66,7 @@ goto:inicio
     pause
     goto:inicio
 
-:op2
+:intgit
     cls
     echo.
     set/p repogit= Cual es la direccion git de el proyecto?
@@ -70,40 +75,41 @@ goto:inicio
     pause
     goto:inicio
 
-:op3
+:intdir
     cls
     echo.
-    set/p carpeta= Cual es el directorio del proyecto?
+    set/p carpeta= Cual es la carpeta del proyecto?
     echo.
     pushd %carpeta%
     if exist .gitignore goto nicedir else goto baddir
 
     :baddir
+	cls
     echo Carpeta incorrecta
-	echo copia el directorio donde esta el archivo .gitignore
+	echo Copia el directorio donde esta el archivo .gitignore
     pause
-    goto:op3
+    goto:intdir
 
     :nicedir
+	cls
     popd
     echo %carpeta% > directorio.txt
     echo Directorio guardado!
     pause
     goto:inicio
   
-:op4
+:pushf
 	cls
     echo.
     <"uwu/repogit.txt" set/p "gitlinea="
     <"uwu/directorio.txt" set/p "cdlinea="
-    echo %g1itlinea%
-    echo %cdlinea%
     cd %cdlinea%
+	echo Haciendo el push forzoso...
     git push --repo=%gitlinea% -f
     pause
     goto:inicio
 
-:op5
+:chems
     cls
     Set /a num=(%Random% %%9)+1
     color %num%
@@ -151,9 +157,9 @@ goto:inicio
     echo                                 -hyso+/-                                       
     echo                                 .yhso++:`                                      https://github.com/FacuuQuiroga
     echo.
-    echo cierra el programa, jamas podras salir de aqui por cotilla MUAJAJAJAJ
+    echo Cierra el programa, jamas podras salir de aqui por cotilla MUAJAJAJAJ
 	pause
-    goto :op5
+    goto :chems
 
 :salir
     @cls&exit
